@@ -48,11 +48,11 @@ function my_edit_epapnneur_date_columns( $columns ) {
 
 	$columns = array(
 
-		'title' => __( 'Title' ),
-        'max' => __( 'Max Request' ),
-        'start_time' => __( 'Start Time' ),
-		'end_time' => __( 'End Time' ),
-        'postal_code' => __( 'Postal Code' )
+		'title'         => __( 'Title' ),
+        'max'           => __( 'Max Request' ),
+        'start_time'    => __( 'Start Time' ),
+		'end_time'      => __( 'End Time' ),
+        'postal_code'   => __( 'Postal Code' )
 	);
 
 	return $columns;
