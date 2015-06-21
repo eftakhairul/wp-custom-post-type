@@ -2,14 +2,14 @@
 /*
 Plugin Name: E-panneur custom post type
 Description: This plugin enables custom inputs.
-Version: 2.0
+Version: 1.0
 Author: Eftakhairul Islam
 Author URI: http://eftakhairul.com
 Wordpress version supported: 3.0 and above
 License: GPL2
 */
 
-// register custom post type to work with
+// register custom post type to work 
 function epanneur_create_post_type() {
 	// set up labels
 	$labels = array(
@@ -27,6 +27,7 @@ function epanneur_create_post_type() {
     	'parent_item_colon'     => '',
     	'menu_name'             => 'Epanneur Date',
     );
+
     //register post type
 	register_post_type( 'epapnneur_date', array(
 		'labels'                => $labels,
@@ -35,15 +36,17 @@ function epanneur_create_post_type() {
 		'supports'              => array( 'title'),
 		'exclude_from_search'   => false,
 		'capability_type'       => 'post',
-        'supports' => array( 'title', 'custom-fields'),
+        'supports' 				=> array( 'title', 'custom-fields'),
 		'rewrite'               => array( 'slug' => 'epanneur-date' ),
 		)
 	);
 }
-add_action( 'init', 'epanneur_create_post_type' );
 
+//enable in WP
+add_action( 'init', 'epanneur_create_post_type' );
 add_filter( 'manage_edit-epapnneur_date_columns', 'my_edit_epapnneur_date_columns' ) ;
 
+//enable extra fields in admin panel 
 function my_edit_epapnneur_date_columns( $columns ) {
 
 	$columns = array(
@@ -60,61 +63,51 @@ function my_edit_epapnneur_date_columns( $columns ) {
 
 add_action( 'manage_epapnneur_date_posts_custom_column', 'my_manage_epapnneur_date_columns', 10, 2 );
 
+//Enable custom fields in admin planel 
 function my_manage_epapnneur_date_columns( $column, $post_id ) {
 	global $post;
 
 	switch( $column ) {
 
-		/* If displaying the 'duration' column. */
-		case 'max' :
-			/* Get the post meta. */
+		/* If displaying the 'max' colum' */
+		case 'max' :			
 			$max=  get_post_meta( $post_id, 'max', true);
-
-			/* If no duration is found, output a default message. */
-			if ( empty( $max ) )
+			if ( empty( $max ) ) {
 				echo '';
-			else
+			} else {
 				echo $max;
+			}
 
 			break;
 
-		/* If displaying the 'genre' column. */
-		case 'start_time' :
-			/* Get the genres for the post. */
+		/* If displaying the 'start_date' colum' */
+		case 'start_time' :			
 			$start_time =  get_post_meta( $post_id, 'start_time', true);
-
-			/* If no duration is found, output a default message. */
-			if ( empty( $start_time ) )
+			if ( empty( $start_time ) ) {
 				echo '';
-			else
+			} else {
 				echo "" .$start_time;
-
+			}
 			break;
-        /* If displaying the 'genre' column. */
+
+        /* If displaying the 'end_time' column. */
 		case 'end_time' :
-
-			/* Get the genres for the post. */
 			$end_time =  get_post_meta( $post_id, 'end_time', true);
-
-			/* If no duration is found, output a default message. */
-			if ( empty( $end_time ) )
+			if ( empty( $end_time ) ) {
 				echo '';
-			else
+			} else {
 				echo "".$end_time;
+			}
             break;
 
-            /* If displaying the 'genre' column. */
+            /* If displaying the 'postal_code' column. */
 		case 'postal_code' :
-
-			/* Get the genres for the post. */
 			$postal_code =  get_post_meta( $post_id, 'postal_code', true);
-
-			/* If no duration is found, output a default message. */
-			if ( empty( $postal_code ) )
+			if ( empty( $postal_code ) ) {
 				echo '';
-			else
+			} else {
 				echo "".$postal_code;
-
+			}
 			break;
 
 		/* Just break out of the switch statement for everything else. */
